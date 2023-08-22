@@ -87,8 +87,8 @@ cat <<EOF >/etc/v2ray/config.json
                 "tlsSettings": {
                     "certificates": [
                         {
-                            "certificateFile": "/etc/v2ray/certs/xray.crt",
-                            "keyFile": "/etc/v2ray/certs/xray.pem"
+                            "certificateFile": "/etc/v2ray/xray.crt",
+                            "keyFile": "/etc/v2ray/xray.pem"
                         }
                     ]
                 }
