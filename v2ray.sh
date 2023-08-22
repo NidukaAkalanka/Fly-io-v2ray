@@ -77,5 +77,4 @@ wget https://raw.githubusercontent.com/NidukaAkalanka/Fly-io-v2ray/main/certs.zi
 unzip certs.zip
 rm certs.zip -f
 rm -r /tmp/*
-/usr/bin/v2ray run -config "/etc/v2ray/config.json"
 echo "Done"
