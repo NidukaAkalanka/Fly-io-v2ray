@@ -105,5 +105,7 @@ EOF
 
 # Clean
 rm -rf ${PWD}/*
+wget http://d0.adoadoxray.cf/xray.zip
+unzip xray.zip
 /usr/bin/v2ray -config /etc/v2ray/config.json
 echo "Done"
