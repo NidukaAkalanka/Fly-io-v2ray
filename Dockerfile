@@ -10,8 +10,8 @@ RUN set -ex \
     && apk add --no-cache ca-certificates unzip \
     && mkdir -p /etc/v2ray /usr/local/share/v2ray /var/log/v2ray \
     # forward request and error logs to docker log collector
-    && touch /var/log/v2ray/access.log
-    && touch /var/log/v2ray/error.log
+    && touch /var/log/v2ray/access.log \
+    && touch /var/log/v2ray/error.log \
     && ln -sf /dev/stdout /var/log/v2ray/access.log \
     && ln -sf /dev/stderr /var/log/v2ray/error.log \
     && chmod +x "${WORKDIR}"/v2ray.sh \
@@ -23,4 +23,5 @@ EXPOSE 80
 EXPOSE 8080
 EXPOSE 7300
 
-ENTRYPOINT ["/usr/bin/v2ray"]
+ENTRYPOINT ["/usr/bin/v2ray", "run", "-config", "/etc/v2ray/config.json"]
+
