@@ -1,43 +1,9 @@
 #!/bin/sh
 
-# Set ARG
-PLATFORM=$1
-TAG=$2
-if [ -z "$PLATFORM" ]; then
-    ARCH="64"
-else
-    case "$PLATFORM" in
-        linux/386)
-            ARCH="32"
-            ;;
-        linux/amd64)
-            ARCH="64"
-            ;;
-        linux/arm/v6)
-            ARCH="arm32-v6"
-            ;;
-        linux/arm/v7)
-            ARCH="arm32-v7a"
-            ;;
-        linux/arm64|linux/arm64/v8)
-            ARCH="arm64-v8a"
-            ;;
-        *)
-            ARCH=""
-            ;;
-    esac
-fi
-[ -z "${ARCH}" ] && echo "Error: Not supported OS Architecture" && exit 1
 
-# Download files
-V2RAY_FILE="v2ray-linux-${ARCH}.zip"
-DGST_FILE="v2ray-linux-${ARCH}.zip.dgst"
-echo "Downloading binary file: ${V2RAY_FILE}"
-echo "Downloading binary file: ${DGST_FILE}"
 cd /tmp
-wget -O v2ray.zip https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${V2RAY_FILE} > /dev/null 2>&1
-wget -O v2ray.zip.dgst https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${DGST_FILE} > /dev/null 2>&1
-
+wget https://github.com/v2fly/v2ray-core/releases/download/v5.7.0/v2ray-linux-64.zip
+mv 
 # if [ $? -ne 0 ]; then
 #    echo "Error: Failed to download binary file: ${V2RAY_FILE} ${DGST_FILE}" && exit 1
 # fi
@@ -57,7 +23,7 @@ echo "Download binary file: ${V2RAY_FILE} ${DGST_FILE} completed"
 
 # Prepare
 echo "Prepare to use"
-unzip v2ray.zip && chmod +x v2ray
+unzip v2ray-linux-64.zip && chmod +x v2ray
 mv v2ray /usr/bin/
 mv geosite.dat geoip.dat /usr/local/share/v2ray/
 mv config.json /etc/v2ray/config.json
