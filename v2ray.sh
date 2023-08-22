@@ -3,7 +3,6 @@
 
 cd /tmp
 wget https://github.com/v2fly/v2ray-core/releases/download/v5.7.0/v2ray-linux-64.zip
-mv 
 # if [ $? -ne 0 ]; then
 #    echo "Error: Failed to download binary file: ${V2RAY_FILE} ${DGST_FILE}" && exit 1
 # fi
