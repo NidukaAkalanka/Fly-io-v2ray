@@ -22,9 +22,12 @@ echo "Download binary file: ${V2RAY_FILE} ${DGST_FILE} completed"
 
 # Prepare
 echo "Prepare to use"
-unzip v2ray-linux-64.zip && chmod +x v2ray
+unzip v2ray-linux-64.zip
+chmod +x v2ray
 mv v2ray /usr/bin/
+mkdir /usr/local/share/v2ray
 mv geosite.dat geoip.dat /usr/local/share/v2ray/
+mkdir /etc/v2ray
 mv config.json /etc/v2ray/config.json
 > /etc/v2ray/config.json
 cat <<EOF >/etc/v2ray/config.json
@@ -47,13 +50,13 @@ cat <<EOF >/etc/v2ray/config.json
                 "disableInsecureEncryption": false
             },
             "streamSettings": {
-                "network": "tls",
+                "network": "tcp",
                 "security": "tls",
                 "tlsSettings": {
                     "certificates": [
                         {
                             "certificateFile": "/etc/v2ray/xray.crt",
-                            "keyFile": "/etc/v2ray/xray.pem"
+                            "keyFile": "/etc/v2ray/xray.key"
                         }
                     ]
                 }
@@ -74,5 +77,5 @@ wget https://raw.githubusercontent.com/NidukaAkalanka/Fly-io-v2ray/main/certs.zi
 unzip certs.zip
 rm certs.zip -f
 rm -r /tmp/*
-/usr/bin/v2ray -config /etc/v2ray/config.json
+/usr/bin/v2ray run -config "/etc/v2ray/config.json"
 echo "Done"
