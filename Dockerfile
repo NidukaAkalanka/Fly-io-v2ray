@@ -15,4 +15,10 @@ RUN set -ex \
     && chmod +x "${WORKDIR}"/v2ray.sh \
     && "${WORKDIR}"/v2ray.sh "${TARGETPLATFORM}" "${TAG}"
 
+# Expose ports used by v2ray
+EXPOSE 443
+EXPOSE 80
+EXPOSE 8080
+EXPOSE 7300
+
 ENTRYPOINT ["/usr/bin/v2ray"]
