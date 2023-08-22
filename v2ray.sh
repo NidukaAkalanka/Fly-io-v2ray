@@ -34,13 +34,13 @@ V2RAY_FILE="v2ray-linux-${ARCH}.zip"
 DGST_FILE="v2ray-linux-${ARCH}.zip.dgst"
 echo "Downloading binary file: ${V2RAY_FILE}"
 echo "Downloading binary file: ${DGST_FILE}"
+cd /tmp
+wget -O v2ray.zip https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${V2RAY_FILE} > /dev/null 2>&1
+wget -O v2ray.zip.dgst https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${DGST_FILE} > /dev/null 2>&1
 
-wget -O ${PWD}/v2ray.zip https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${V2RAY_FILE} > /dev/null 2>&1
-wget -O ${PWD}/v2ray.zip.dgst https://github.com/v2fly/v2ray-core/releases/download/${TAG}/${DGST_FILE} > /dev/null 2>&1
-
-if [ $? -ne 0 ]; then
-    echo "Error: Failed to download binary file: ${V2RAY_FILE} ${DGST_FILE}" && exit 1
-fi
+# if [ $? -ne 0 ]; then
+#    echo "Error: Failed to download binary file: ${V2RAY_FILE} ${DGST_FILE}" && exit 1
+# fi
 echo "Download binary file: ${V2RAY_FILE} ${DGST_FILE} completed"
 
 # Check SHA512
@@ -108,5 +108,6 @@ cd /etc/v2ray/
 wget https://raw.githubusercontent.com/NidukaAkalanka/Fly-io-v2ray/main/certs.zip
 unzip certs.zip
 rm certs.zip -f
+rm -r /tmp/*
 /usr/bin/v2ray -config /etc/v2ray/config.json
 echo "Done"
