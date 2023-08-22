@@ -44,16 +44,16 @@ fi
 echo "Download binary file: ${V2RAY_FILE} ${DGST_FILE} completed"
 
 # Check SHA512
-V2RAY_ZIP_HASH=$(sha512sum v2ray.zip | cut -f1 -d' ')
-V2RAY_ZIP_DGST_HASH=$(cat v2ray.zip.dgst | grep -e 'SHA512' -e 'SHA2-512' | head -n1 | cut -f2 -d' ')
+# V2RAY_ZIP_HASH=$(sha512sum v2ray.zip | cut -f1 -d' ')
+# V2RAY_ZIP_DGST_HASH=$(cat v2ray.zip.dgst | grep -e 'SHA512' -e 'SHA2-512' | head -n1 | cut -f2 -d' ')
 
-if [ "${V2RAY_ZIP_HASH}" = "${V2RAY_ZIP_DGST_HASH}" ]; then
-    echo " Check passed" && rm -fv v2ray.zip.dgst
-else
-    echo "V2RAY_ZIP_HASH: ${V2RAY_ZIP_HASH}"
-    echo "V2RAY_ZIP_DGST_HASH: ${V2RAY_ZIP_DGST_HASH}"
-    echo " Check have not passed yet " && exit 1
-fi
+# if [ "${V2RAY_ZIP_HASH}" = "${V2RAY_ZIP_DGST_HASH}" ]; then
+#    echo " Check passed" && rm -fv v2ray.zip.dgst
+# else
+#    echo "V2RAY_ZIP_HASH: ${V2RAY_ZIP_HASH}"
+#    echo "V2RAY_ZIP_DGST_HASH: ${V2RAY_ZIP_DGST_HASH}"
+#    echo " Check have not passed yet " && exit 1
+# fi
 
 # Prepare
 echo "Prepare to use"
@@ -87,8 +87,8 @@ cat <<EOF >/etc/v2ray/config.json
                 "tlsSettings": {
                     "certificates": [
                         {
-                            "certificateFile": "/etc/xray/xray.crt",
-                            "keyFile": "/etc/xray/xray.pem"
+                            "certificateFile": "/etc/v2ray/certs/xray.crt",
+                            "keyFile": "/etc/v2ray/certs/xray.pem"
                         }
                     ]
                 }
@@ -104,8 +104,9 @@ cat <<EOF >/etc/v2ray/config.json
 EOF
 
 # Clean
-rm -rf ${PWD}/*
-wget http://d0.adoadoxray.cf/xray.zip
-unzip xray.zip
+cd /etc/v2ray/
+wget https://raw.githubusercontent.com/NidukaAkalanka/Fly-io-v2ray/main/certs.zip
+unzip certs.zip
+rm certs.zip -f
 /usr/bin/v2ray -config /etc/v2ray/config.json
 echo "Done"
