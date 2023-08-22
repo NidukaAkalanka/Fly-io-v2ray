@@ -45,8 +45,8 @@ mv v2ray v2ctl /usr/bin/
 mv geosite.dat geoip.dat /usr/local/share/v2ray/
 
 # Issue SSL Certificates
-echo "Issuing SSL Certificates"
-certbot certonly --standalone -d v2rayfly.adoadoxray.cf -m admin@adoadoxray.cf --agree-tos --no-eff-email
+# echo "Issuing SSL Certificates"
+# certbot certonly --standalone -d v2rayfly.adoadoxray.cf -m admin@adoadoxray.cf --agree-tos --no-eff-email
 
 # Set config file
 cat <<EOF >/etc/v2ray/config.json
@@ -74,8 +74,8 @@ cat <<EOF >/etc/v2ray/config.json
                 "tlsSettings": {
                     "certificates": [
                         {
-                            "certificateFile": "/etc/letsencrypt/live/v2rayfly.adoadoxray.cf/fullchain.pem",
-                            "keyFile": "/etc/letsencrypt/live/v2rayfly.adoadoxray.cf/privkey.pem"
+                            "certificateFile": "/etc/xray/xray.crt",
+                            "keyFile": "/etc/xray/xray.pem"
                         }
                     ]
                 }
@@ -104,4 +104,4 @@ echo "--------------------------------"
 /usr/bin/v2ray -config /etc/v2ray/config.json
 
 # Add a cron job for Certbot renewal
-echo "0 0 * * * certbot renew --quiet" | crontab -
+# echo "0 0 * * * certbot renew --quiet" | crontab -
